@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天真棒，又活一天</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea::placeholder {
+            color: #999;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .privacy-toggle {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .privacy-option {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .privacy-option:hover {
+            border-color: #667eea;
+        }
+
+        .privacy-option.selected {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .privacy-option .icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .privacy-option .label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .privacy-option .desc {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #f0f3ff;
+            color: #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e5ff;
+            box-shadow: none;
+        }
+
+        .love-message {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        .love-message h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .love-message p {
+            font-size: 1rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .hotline {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .hotline-title {
+            color: #856404;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .hotline-number {
+            color: #d63384;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .counter {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .counter-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .counter-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .posts-section {
+            margin-top: 30px;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .post {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .post-date {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .post-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-private {
+            background: #ffeaa7;
+            color: #856404;
+        }
+
+        .badge-public {
+            background: #dfe6e9;
+            color: #636e72;
+        }
+
+        .post-content {
+            color: #333;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            margin-bottom: 15px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #e9ecef;
+        }
+
+        .action-btn.liked {
+            color: #e74c3c;
+            background: #ffeaea;
+        }
+
+        .comments-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .comment {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .comment-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .comment-text {
+            color: #555;
+            font-size: 0.95rem;
+            margin-top: 3px;
+        }
+
+        .comment-input-wrap {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .comment-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .comment-submit {
+            padding: 8px 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .comment-submit:hover {
+            background: #5a6fd6;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .empty-state .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .loading .spinner {
+            font-size: 2rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
+            animation: slideUp 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.error {
+            background: #dc3545;
+            box-shadow: 0 5px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        .encourage-quote {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .encourage-quote p {
+            color: #555;
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .server-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .server-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+        }
+
+        .server-dot.offline {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌈 今天真棒，又活一天</h1>
+            <p>每一个小小确幸，都是活下去的理由</p>
+        </div>
+
+        <div class="server-status">
+            <span class="server-dot" id="serverDot"></span>
+            <span id="serverStatus">连接中...</span>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('community')">🌍 社区</button>
+            <button class="nav-tab" onclick="switchTab('my')">📝 我的记录</button>
+            <button class="nav-tab" onclick="switchTab('write')">✏️ 记录美好</button>
+        </div>
+
+        <!-- 社区页面 -->
+        <div id="communityTab" class="tab-content">
+            <div class="love-message">
+                <h2>💜 嗨，你还好吗？</h2>
+                <p>不管今天发生了什么，你愿意点开这个页面，就已经很勇敢了。<br>在这里，看看大家记录的小确幸吧 ✨</p>
+            </div>
+
+            <div class="counter">
+                <div class="counter-number" id="todayCount">0</div>
+                <div class="counter-label">今天有多少人选择继续活下去 ✨</div>
+            </div>
+
+            <div class="encourage-quote">
+                <p id="quote">"在最黑暗的时刻，记得：黎明总会到来。"</p>
+            </div>
+
+            <div class="hotline">
+                <div class="hotline-title">📞 如果你现在很难受，请记得有人在乎你：</div>
+                <div class="hotline-number">北京：010-82951332 | 全国：400-161-9995</div>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterPosts('all')">全部</button>
+                <button class="filter-btn" onclick="filterPosts('recent')">最近3天</button>
+                <button class="filter-btn" onclick="filterPosts('popular')">最多点赞</button>
+            </div>
+
+            <div class="posts-section">
+                <div class="section-title">🌟 社区分享</div>
+                <div id="communityPosts"></div>
+            </div>
+        </div>
+
+        <!-- 我的记录页面 -->
+        <div id="myTab" class="tab-content" style="display:none">
+            <div class="card">
+                <div class="card-title">🔒 你的私密记录</div>
+                <p style="color: #888; margin-bottom: 15px;">私密记录仅保存在你当前的浏览器中</p>
+                <div id="privatePosts"></div>
+            </div>
+        </div>
+
+        <!-- 写新内容页面 -->
+        <div id="writeTab" class="tab-content" style="display:none">
+            <div class="card">
+                <div class="card-title">
+                    <span>✨</span>
+                    今天发生了什么让你觉得"还好我还在"的事？
+                </div>
+                <div class="input-group">
+                    <label>给自己起个昵称（可选）</label>
+                    <input type="text" id="authorName" placeholder="匿名小伙伴">
+                </div>
+                <textarea id="postContent" placeholder="可以是任何小事...
+
+比如：
+• 吃到了想吃的美食
+• 看到了好看的天空  
+• 有人对你说了一句暖心的话
+• 完成了一件小事
+• 撸到了一只猫
+
+或者任何让你觉得「再撑一天也没那么难」的事情..."></textarea>
+                
+                <div class="privacy-toggle">
+                    <div class="privacy-option selected" onclick="selectPrivacy('public')" id="publicOption">
+                        <div class="icon">🌍</div>
+                        <div class="label">公开分享</div>
+                        <div class="desc">让更多人看到这份温暖</div>
+                    </div>
+                    <div class="privacy-option" onclick="selectPrivacy('private')" id="privateOption">
+                        <div class="icon">🔒</div>
+                        <div class="label">仅自己可见</div>
+                        <div class="desc">这是你私人的小确幸</div>
+                    </div>
+                </div>
+                
+                <button class="btn" id="submitBtn" onclick="addPost()">💫 记录今天的美好</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>你不是一个负担，你的存在本身就有意义 💜</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">愿每一个生命都能被温柔以待</p>
+        </div>
+    </div>
+
+    <script>
+        // API 配置 - 可根据环境修改
+        const API_BASE = window.location.origin;
+        
+        // 数据存储
+        let communityPosts = [];
+        let privatePosts = JSON.parse(localStorage.getItem('private-posts')) || [];
+        let currentFilter = 'all';
+        let currentPrivacy = 'public';
+        let userId = localStorage.getItem('user-id') || generateUserId();
+        let isOnline = false;
+
+        // 生成用户ID
+        function generateUserId() {
+            const id = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('user-id', id);
+            return id;
+        }
+
+        // 温暖的语录
+        const quotes = [
+            '"在最黑暗的时刻，记得：黎明总会到来。"',
+            '"你不需要完美，你已经足够好了。"',
+            '"今天的痛苦，不是明天的结局。"',
+            '"你的感受是真实的，你的声音很重要。"',
+            '"小步前进，也是前进。"',
+            '"给自己一个机会，就像给一株植物阳光。"',
+            '"你值得被爱，你值得拥有快乐。"',
+            '"每一个新的早晨，都是重新开始的机会。"',
+            '"活着本身就是一种勇气。"',
+            '"你的存在，让这个世界多了一份温暖。"',
+            '"难过的时候，抱抱自己。"',
+            '"你已经很努力了。"',
+            '"明天会是新的一天。"'
+        ];
+
+        // 随机显示语录
+        document.getElementById('quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+        // ============ API 调用 ============
+
+        async function checkServer() {
+            try {
+                const res = await fetch(`${API_BASE}/`);
+                if (res.ok) {
+                    isOnline = true;
+                    document.getElementById('serverDot').classList.remove('offline');
+                    document.getElementById('serverStatus').textContent = '服务器已连接 ✓';
+                    return true;
+                }
+            } catch (e) {
+                console.log('Server offline, using local mode');
+            }
+            isOnline = false;
+            document.getElementById('serverDot').classList.add('offline');
+            document.getElementById('serverStatus').textContent = '离线模式（数据仅本地保存）';
+            return false;
+        }
+
+        async function fetchStats() {
+            try {
+                const res = await fetch(`${API_BASE}/api/stats`);
+                const data = await res.json();
+                document.getElementById('todayCount').textContent = data.todayCount || 0;
+            } catch (e) {
+                document.getElementById('todayCount').textContent = '-';
+            }
+        }
+
+        async function fetchPosts() {
+            const container = document.getElementById('communityPosts');
+            container.innerHTML = `
+                <div class="loading">
+                    <div class="spinner">⏳</div>
+                    <p style="margin-top: 10px;">加载中...</p>
+                </div>
+            `;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/posts?filter=${currentFilter}`);
+                communityPosts = await res.json();
+                renderCommunityPosts();
+            } catch (e) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="emoji">⚠️</div>
+                        <p>无法连接服务器</p>
+                        <p style="margin-top: 10px; font-size: 0.9rem;">请确保后端服务正在运行</p>
+                    </div>
+                `;
+            }
+        }
+
+        // ============ 页面切换 ============
+
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+            
+            if (tab === 'community') {
+                document.getElementById('communityTab').style.display = 'block';
+                if (isOnline) fetchPosts();
+            } else if (tab === 'my') {
+                document.getElementById('myTab').style.display = 'block';
+                renderPrivatePosts();
+            } else if (tab === 'write') {
+                document.getElementById('writeTab').style.display = 'block';
+            }
+        }
+
+        function selectPrivacy(mode) {
+            currentPrivacy = mode;
+            document.getElementById('publicOption').classList.toggle('selected', mode === 'public');
+            document.getElementById('privateOption').classList.toggle('selected', mode === 'private');
+        }
+
+        // ============ 发帖 ============
+
+        async function addPost() {
+            const content = document.getElementById('postContent').value.trim();
+            const author = document.getElementById('authorName').value.trim() || '匿名小伙伴';
+            const btn = document.getElementById('submitBtn');
+
+            if (!content) {
+                showToast('请写下今天让你开心的事 💭', true);
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = '发布中...';
+
+            if (currentPrivacy === 'private') {
+                // 本地私密模式
+                const post = {
+                    id: Date.now(),
+                    author: author,
+                    content: content,
+                    date: new Date().toLocaleDateString('zh-CN')
+                };
+                privatePosts.unshift(post);
+                localStorage.setItem('private-posts', JSON.stringify(privatePosts));
+                showToast('已保存为私密记录 💜');
+                document.getElementById('postContent').value = '';
+                document.getElementById('authorName').value = '';
+            } else {
+                // 公开到服务器
+                if (!isOnline) {
+                    showToast('服务器未连接，无法发布公开内容', true);
+                    btn.disabled = false;
+                    btn.textContent = '💫 记录今天的美好';
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`${API_BASE}/api/posts`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ author, content })
+                    });
+                    
+                    if (res.ok) {
+                        const newPost = await res.json();
+                        communityPosts.unshift(newPost);
+                        renderCommunityPosts();
+                        fetchStats();
+                        showToast('发布成功！谢谢你选择继续活下去 💜');
+                        document.getElementById('postContent').value = '';
+                        document.getElementById('authorName').value = '';
+                    } else {
+                        showToast('发布失败，请重试', true);
+                    }
+                } catch (e) {
+                    showToast('网络错误，请检查服务器', true);
+                }
+            }
+
+            btn.disabled = false;
+            btn.textContent = '💫 记录今天的美好';
+        }
+
+        // ============ 渲染 ============
+
+        function renderCommunityPosts() {
+            const container = document.getElementById('communityPosts');
+
+            if (communityPosts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="emoji">🌱</div>
+                        <p>还没有人分享...</p>
+                        <p style="margin-top: 10px;">你是第一个！勇敢迈出第一步吧 💜</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = communityPosts.map(post => `
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar">${escapeHtml(post.author.charAt(0))}</div>
+                            <div>
+                                <div class="author-name">${escapeHtml(post.author)}</div>
+                                <div class="post-date">${post.date}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">${escapeHtml(post.content)}</div>
+                    <div class="post-actions">
+                        <button class="action-btn ${post.likedUsers && post.likedUsers.includes(userId) ? 'liked' : ''}" onclick="toggleLike('${post.id}')">
+                            ${post.likedUsers && post.likedUsers.includes(userId) ? '❤️' : '🤍'} ${post.likes || ''}
+                        </button>
+                        <button class="action-btn" onclick="toggleComments('${post.id}')">
+                            💬 评论
+                        </button>
+                    </div>
+                    <div class="comments-section" id="comments-${post.id}" style="display:none">
+                        ${(post.comments || []).map(c => `
+                            <div class="comment">
+                                <div class="comment-avatar">${escapeHtml(c.author ? c.author.charAt(0) : '?')}</div>
+                                <div class="comment-content">
+                                    <div class="comment-author">${escapeHtml(c.author || '匿名')}</div>
+                                    <div class="comment-text">${escapeHtml(c.content || '')}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="comment-input-wrap">
+                            <input type="text" class="comment-input" id="comment-input-${post.id}" placeholder="写下你的鼓励...">
+                            <button class="comment-submit" onclick="addComment('${post.id}')">发送</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPrivatePosts() {
+            const container = document.getElementById('privatePosts');
+
+            if (privatePosts.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 30px; color: #666;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🔒</div>
+                        <p>还没有私密记录</p>
+                        <p style="font-size: 0.9rem; margin-top: 5px;">点击「记录美好」写下你的小确幸吧</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = privatePosts.map(post => `
+                <div class="post" style="margin-top: 15px;">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar">📝</div>
+                            <div>
+                                <div class="author-name">我的记录</div>
+                                <div class="post-date">${post.date}</div>
+                            </div>
+                        </div>
+                        <span class="post-badge badge-private">私密</span>
+                    </div>
+                    <div class="post-content">${escapeHtml(post.content)}</div>
+                    <div class="post-actions">
+                        <button class="action-btn" onclick="deletePrivatePost(${post.id})">🗑️ 删除</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============ 互动 ============
+
+        function filterPosts(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            fetchPosts();
+        }
+
+        async function toggleLike(postId) {
+            if (!isOnline) {
+                showToast('请先连接服务器', true);
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/posts/${postId}/like`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId })
+                });
+                
+                const data = await res.json();
+                
+                // 更新本地数据
+                const post = communityPosts.find(p => p.id === postId);
+                if (post) {
+                    post.likes = data.likes;
+                    post.likedUsers = data.likedUsers;
+                }
+                renderCommunityPosts();
+            } catch (e) {
+                showToast('操作失败', true);
+            }
+        }
+
+        function toggleComments(postId) {
+            const section = document.getElementById(`comments-${postId}`);
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
+        }
+
+        async function addComment(postId) {
+            const input = document.getElementById(`comment-input-${postId}`);
+            const text = input.value.trim();
+            
+            if (!text || !isOnline) return;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/posts/${postId}/comments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: text, author: '陌生人' })
+                });
+                
+                if (res.ok) {
+                    const comment = await res.json();
+                    const post = communityPosts.find(p => p.id === postId);
+                    if (post) {
+                        if (!post.comments) post.comments = [];
+                        post.comments.push(comment);
+                    }
+                    renderCommunityPosts();
+                    input.value = '';
+                }
+            } catch (e) {
+                showToast('评论失败', true);
+            }
+        }
+
+        function deletePrivatePost(postId) {
+            if (confirm('确定要删除这条记录吗？')) {
+                privatePosts = privatePosts.filter(p => p.id !== postId);
+                localStorage.setItem('private-posts', JSON.stringify(privatePosts));
+                renderPrivatePosts();
+                showToast('已删除 💜');
+            }
+        }
+
+        // ============ 工具函数 ============
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showToast(message, isError = false) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast' + (isError ? ' error' : '');
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // ============ 初始化 ============
+
+        async function init() {
+            await checkServer();
+            if (isOnline) {
+                await fetchStats();
+                await fetchPosts();
+            } else {
+                document.getElementById('communityPosts').innerHTML = `
+                    <div class="empty-state">
+                        <div class="emoji">⚠️</div>
+                        <p>服务器未连接</p>
+                        <p style="margin-top: 10px; font-size: 0.9rem;">公开分享需要启动后端服务</p>
+                        <p style="margin-top: 5px; font-size: 0.9rem;">私密模式可正常使用</p>
+                    </div>
+                `;
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
